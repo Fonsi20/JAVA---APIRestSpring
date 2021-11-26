@@ -1,8 +1,9 @@
 package com.BackAPIRest.back.managers;
 
 import com.BackAPIRest.back.managers.dao.AccountDAO;
+import com.BackAPIRest.rest.pojos.Account;
+
 import java.sql.Timestamp;
-import com.BackAPIRest.rest.entitys.Account;
 
 public class ManagerAccount {
 

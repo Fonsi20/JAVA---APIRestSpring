@@ -1,4 +1,4 @@
-package com.BackAPIRest.rest.entitys;
+package com.BackAPIRest.rest.pojos;
 
 import java.io.Serializable;
 

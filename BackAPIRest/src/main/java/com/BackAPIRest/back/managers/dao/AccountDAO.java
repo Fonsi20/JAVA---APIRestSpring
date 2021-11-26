@@ -1,6 +1,6 @@
 package com.BackAPIRest.back.managers.dao;
 
-import com.BackAPIRest.rest.entitys.Account;
+import com.BackAPIRest.rest.pojos.Account;
 
 public class AccountDAO {
 

@@ -1,15 +1,36 @@
 package com.BackAPIRest.rest.services;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
+
 import com.BackAPIRest.back.managers.ManagerAccount;
-import com.BackAPIRest.rest.entitys.Account;
-import com.BackAPIRest.rest.entitys.Balance;
-import com.BackAPIRest.rest.entitys.Deposit;
-import com.BackAPIRest.rest.entitys.Transaction;
-import com.BackAPIRest.rest.entitys.Withdrawal;
+import com.BackAPIRest.rest.entitis.EAccounts;
+import com.BackAPIRest.rest.pojos.Account;
+import com.BackAPIRest.rest.pojos.Balance;
+import com.BackAPIRest.rest.pojos.Deposit;
+import com.BackAPIRest.rest.pojos.Transaction;
+import com.BackAPIRest.rest.pojos.Withdrawal;
+import com.BackAPIRest.rest.services.mappers.AccountMapper;
+import com.BackAPIRest.rest.services.repository.IAccountRepository;
 
-import antlr.debug.MessageEvent;
-
+@Service
+@Transactional
+@Validated
 public class BankAccountsServices {
+
+	@Autowired
+	private static IAccountRepository repository;
+
+	public static Account getAccount(Integer accountId) {
+		//query sobre la tabla ACCOUNT con keyValue account-id
+		Optional<EAccounts> result = IAccountRepository.getAccount(accountId);
+		EAccounts accResult = result.get();
+		return AccountMapper.toApiDomainAccount(accResult);
+	}
 
 	public static Account createAccount(Account param) {
 		Account resp = null;
@@ -20,7 +41,6 @@ public class BankAccountsServices {
 		}
 		return resp;
 	}
-
 
 	public static Balance depositAccounteAccount(Deposit param) {
 		// TODO Auto-generated method stub
@@ -41,4 +61,5 @@ public class BankAccountsServices {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
