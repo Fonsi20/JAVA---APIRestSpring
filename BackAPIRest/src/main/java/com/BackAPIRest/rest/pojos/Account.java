@@ -2,20 +2,25 @@ package com.BackAPIRest.rest.pojos;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Account implements Serializable {
 
+	@JsonProperty("id")
 	private Integer id;
 
+	@JsonProperty("name")
 	private String name;
 
+	@JsonProperty("limit")
 	private Float limit;
 
+	@JsonProperty("createdAt")
 	private String createdAt;
 
+	@JsonProperty("balance")
 	private Double balance;
 
-	
-	
 	public Account() {
 		super();
 	}

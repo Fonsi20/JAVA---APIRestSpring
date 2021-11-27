@@ -31,9 +31,6 @@ public interface API {
 	@GetMapping(value = UrlConstants.GET_MY_ACCOUNT, produces = { "application/json" })
 	public ResponseEntity<Account> getMyAccount(@PathVariable(value = "account-id") Integer accountId);
 
-	@GetMapping(value = UrlConstants.GET_ALL_ACCOUNT, produces = { "application/json" })
-	public ResponseEntity<List<Account>> getAllAccount();
-
 	// POST
 	@PostMapping(value = UrlConstants.POST_ACCOUNT, produces = { "application/json" })
 	public ResponseEntity<Account> postAccount(@RequestBody Account param);
@@ -47,8 +44,7 @@ public interface API {
 			@RequestBody Withdrawal param);
 
 	@PostMapping(value = UrlConstants.POST_ACCOUNT_BALANCE, produces = { "application/json" })
-	public ResponseEntity<Balance> getAccountBalance(@PathVariable(value = "account-id") Integer accountId,
-			@RequestBody Balance param);
+	public ResponseEntity<Balance> getAccountBalance(@PathVariable(value = "account-id") Integer accountId);
 
 	@PostMapping(value = UrlConstants.POST_ACCOUNT_TRANSACTIONS, produces = { "application/json" })
 	public ResponseEntity<Transaction> getAccountTransactions(@PathVariable(value = "account-id") Integer accountId);

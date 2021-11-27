@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class EMovements {
 
 	@Id
-	@Column(name = "id_movement")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_movement", columnDefinition = "INT")
 	private Integer idMovement;
 
 	public Integer getIdMovement() {
@@ -24,7 +24,7 @@ public class EMovements {
 		this.idMovement = idMovement;
 	}
 
-	@Column(name = "id_type", nullable = false)
+	@Column(name = "id_type", nullable = false, columnDefinition = "INT")
 	private String idType;
 
 	public String getIdType() {
@@ -35,7 +35,7 @@ public class EMovements {
 		this.idType = idType;
 	}
 
-	@Column(name = "id_account", nullable = false)
+	@Column(name = "id_account", nullable = false, columnDefinition = "INT")
 	private Float idAccount;
 
 	public Float getIdAccount() {
@@ -46,7 +46,7 @@ public class EMovements {
 		this.idAccount = idAccount;
 	}
 
-	@Column(name = "amount", nullable = false)
+	@Column(name = "amount", nullable = false, columnDefinition = "REAL")
 	private String amount;
 
 	public String getAmount() {
@@ -57,7 +57,7 @@ public class EMovements {
 		this.amount = amount;
 	}
 
-	@Column(name = "create_date", nullable = false)
+	@Column(name = "create_date", nullable = false, columnDefinition = "TIMESTAMP")
 	private Double createDate;
 
 	public Double getCreateDate() {

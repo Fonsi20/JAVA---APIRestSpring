@@ -30,3 +30,6 @@ alter table movements add FOREIGN key (id_account) references account(id);
 
 insert into movements_types(name, multiplicador) values('withdrawal', -1);
 insert into movements_types(name, multiplicador) values('deposit', 1);
+
+
+insert into ACCOUNTS (name,limit_,createdat,balance)values('Cristiano',60,'2021-06-20',9000)

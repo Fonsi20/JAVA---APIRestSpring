@@ -29,10 +29,6 @@ public class GenericWS implements API {
 		return ResponseEntity.ok(BankAccountsServices.getAccount(accountId));
 	}
 
-	public ResponseEntity<List<Account>> getAllAccount() {
-		return null;
-	}
-
 	// POST
 	public ResponseEntity<Account> postAccount(Account param) {
 		return ResponseEntity.ok(BankAccountsServices.createAccount(param));
@@ -46,12 +42,11 @@ public class GenericWS implements API {
 		return ResponseEntity.ok(BankAccountsServices.withdrawalAccount(param));
 	}
 
-	public ResponseEntity<Balance> getAccountBalance(Integer accountId, Balance param) {
-		return ResponseEntity.ok(BankAccountsServices.balanceAccount(param));
+	public ResponseEntity<Balance> getAccountBalance(Integer accountId) {
+		return ResponseEntity.ok(BankAccountsServices.balanceAccount(accountId));
 	}
 
 	public ResponseEntity<Transaction> getAccountTransactions(Integer accountId) {
 		return ResponseEntity.ok(BankAccountsServices.transactionAccount(accountId));
 	}
-
 }

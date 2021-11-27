@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class EAccounts {
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", columnDefinition = "INT")
 	private Integer id;
 
 	public Integer getId() {
@@ -24,7 +24,7 @@ public class EAccounts {
 		this.id = id;
 	}
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, columnDefinition = "NVARCHAR")
 	private String name;
 
 	public String getName() {
@@ -35,7 +35,7 @@ public class EAccounts {
 		this.name = name;
 	}
 
-	@Column(name = "limit_", nullable = false)
+	@Column(name = "limit_", nullable = false, columnDefinition = "REAL")
 	private Float limit;
 
 	public Float getLimit() {
@@ -46,7 +46,7 @@ public class EAccounts {
 		this.limit = limit;
 	}
 
-	@Column(name = "createdAt", nullable = false)
+	@Column(name = "createdAt", nullable = false, columnDefinition = "TIMESTAMP")
 	private String createdAt;
 
 	public String getCreatedAt() {
@@ -57,7 +57,7 @@ public class EAccounts {
 		this.createdAt = createdAt;
 	}
 
-	@Column(name = "balance", nullable = false)
+	@Column(name = "balance", nullable = false, columnDefinition = "DOUBLE")
 	private Double balance;
 
 	public Double getBalance() {

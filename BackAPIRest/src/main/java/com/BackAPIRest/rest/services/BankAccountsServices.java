@@ -7,14 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.BackAPIRest.BankUtils;
 import com.BackAPIRest.back.managers.ManagerAccount;
 import com.BackAPIRest.rest.entitis.EAccounts;
+import com.BackAPIRest.rest.entitis.EMovements;
 import com.BackAPIRest.rest.pojos.Account;
 import com.BackAPIRest.rest.pojos.Balance;
 import com.BackAPIRest.rest.pojos.Deposit;
 import com.BackAPIRest.rest.pojos.Transaction;
 import com.BackAPIRest.rest.pojos.Withdrawal;
 import com.BackAPIRest.rest.services.mappers.AccountMapper;
+import com.BackAPIRest.rest.services.repository.AccountRepository;
 import com.BackAPIRest.rest.services.repository.IAccountRepository;
 
 @Service
@@ -23,42 +26,120 @@ import com.BackAPIRest.rest.services.repository.IAccountRepository;
 public class BankAccountsServices {
 
 	@Autowired
-	private static IAccountRepository repository;
+	private static IAccountRepository IAccountRepository;
 
+	// Get account
 	public static Account getAccount(Integer accountId) {
-		//query sobre la tabla ACCOUNT con keyValue account-id
-		Optional<EAccounts> result = IAccountRepository.getAccount(accountId);
-		EAccounts accResult = result.get();
-		return AccountMapper.toApiDomainAccount(accResult);
-	}
-
-	public static Account createAccount(Account param) {
-		Account resp = null;
-		try {
-			resp = ManagerAccount.insertAccount(param);
-		} catch (Exception e) {
-			System.out.println(e);
+		if (!BankUtils.isNotNull(accountId)) {
+			return null;
 		}
-		return resp;
+
+		Optional<EAccounts> result;
+		result = IAccountRepository.getAccount(accountId);
+		if (!result.isEmpty()) {
+			EAccounts accResult = result.get();
+			return AccountMapper.toApiDomainAccount(accResult);
+		}
+		return null;
 	}
 
+	// Create account
+	public static Account createAccount(Account param) {
+		if (!BankUtils.isNotNull(param)) {
+			return null;
+		}
+
+		Account account = getAccount(param.getId());
+		if (account == null) {
+			Optional<EAccounts> result;
+			result = IAccountRepository.createAccount(param);
+			if (!result.isEmpty()) {
+				EAccounts accResult = result.get();
+				return new Account();
+				// return AccountMapper.toApiDomainAccount(accResult);
+			}
+		}
+		return null;
+
+//		Account resp = null;
+//		resp = ManagerAccount.insertAccount(param);
+//		return resp;
+	}
+
+	// Deposit
 	public static Balance depositAccounteAccount(Deposit param) {
-		// TODO Auto-generated method stub
+		if (!BankUtils.isNotNull(param)) {
+			return null;
+		}
+
+		Account account = getAccount(param.getId());
+		if (account != null) {
+			Optional<EAccounts> result;
+			result = IAccountRepository.makeDeposit(param, account);
+			if (!result.isEmpty()) {
+				EAccounts accResult = result.get();
+				return new Balance();
+				// return BalanceMapper.toApiDomainBalance(accResult);
+			}
+		}
 		return null;
 	}
 
+	// Withdrawal
 	public static Balance withdrawalAccount(Withdrawal param) {
-		// TODO Auto-generated method stub
+		if (!BankUtils.isNotNull(param)) {
+			return null;
+		}
+
+		Account account = getAccount(param.getId());
+		if (!BankUtils.isNotNull(account) && BankUtils.checkBalance(account.getBalance(), param.getAmount())) {
+			Optional<EAccounts> result;
+			result = IAccountRepository.makeWithdrawal(param, account);
+			if (!result.isEmpty()) {
+				EAccounts accResult = result.get();
+				return new Balance();
+				// return BalanceMapper.toApiDomainBalance(accResult);
+			}
+		}
+		return null;
+
+	}
+
+	// Obtein balance
+	public static Balance balanceAccount(Integer accountId) {
+		if (!BankUtils.isNotNull(accountId)) {
+			return null;
+		}
+
+		Account account = getAccount(accountId);
+		if (!BankUtils.isNotNull(account)) {
+			Optional<EAccounts> result;
+			result = IAccountRepository.getAccount(accountId);
+			if (!result.isEmpty()) {
+				EAccounts accResult = result.get();
+				return new Balance();
+				// return BalanceMapper.toApiDomainBalance(accResult);
+			}
+		}
 		return null;
 	}
 
-	public static Balance balanceAccount(Balance param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	// Look the transactions
 	public static Transaction transactionAccount(Integer accountId) {
-		// TODO Auto-generated method stub
+		if (!BankUtils.isNotNull(accountId)) {
+			return null;
+		}
+
+		Account account = getAccount(accountId);
+		if (!BankUtils.isNotNull(account)) {
+			Optional<EMovements> result;
+			result = IAccountRepository.getTransactions(accountId);
+			if (!result.isEmpty()) {
+				EMovements accResult = result.get();
+				return new Transaction();
+//				return MovementsMapper.toApiDomainMovements(accResult);
+			}
+		}
 		return null;
 	}
 

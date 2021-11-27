@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class EMovementsTypes {
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", columnDefinition = "INT")
 	private Integer id;
 
 	public Integer getId() {
@@ -24,7 +24,7 @@ public class EMovementsTypes {
 		this.id = id;
 	}
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, columnDefinition = "NVARCHAR")
 	private String name;
 
 	public String getName() {
@@ -35,7 +35,7 @@ public class EMovementsTypes {
 		this.name = name;
 	}
 
-	@Column(name = "multiplicador", nullable = false)
+	@Column(name = "multiplicador", nullable = false, columnDefinition = "INT")
 	private Float multiplicador;
 
 	public Float getMultiplicador() {
