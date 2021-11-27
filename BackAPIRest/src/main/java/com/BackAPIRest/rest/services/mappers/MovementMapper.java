@@ -4,11 +4,13 @@ import org.mapstruct.Mapper;
 import org.springframework.web.bind.annotation.Mapping;
 
 import com.BackAPIRest.rest.entitis.EAccounts;
+import com.BackAPIRest.rest.entitis.EMovements;
 import com.BackAPIRest.rest.pojos.Account;
+import com.BackAPIRest.rest.pojos.Transaction;
 
 @Mapper
-public interface AccountMapper {
+public interface MovementMapper {
 
-	public Account toApiDomainAccount(EAccounts accResult);
+	public Transaction toApiDomainAccount(EMovements accResult);
 
 }

@@ -38,7 +38,12 @@ public class BankAccountsServices {
 		result = IAccountRepository.getAccount(accountId);
 		if (!result.isEmpty()) {
 			EAccounts accResult = result.get();
-			return AccountMapper.toApiDomainAccount(accResult);
+			try {
+				return AccountMapper.toApiDomainAccount(accResult);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -137,7 +142,7 @@ public class BankAccountsServices {
 			if (!result.isEmpty()) {
 				EMovements accResult = result.get();
 				return new Transaction();
-//				return MovementsMapper.toApiDomainMovements(accResult);
+//				return MovementMapper.toApiDomainMovements(accResult);
 			}
 		}
 		return null;

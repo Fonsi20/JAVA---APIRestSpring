@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.Mapping;
 
 import com.BackAPIRest.rest.entitis.EAccounts;
 import com.BackAPIRest.rest.pojos.Account;
+import com.BackAPIRest.rest.pojos.Balance;
 
 @Mapper
-public interface AccountMapper {
+public interface BalanceMapper {
 
-	public Account toApiDomainAccount(EAccounts accResult);
+	public Balance toApiDomainBalance(EAccounts accResult);
 
 }
